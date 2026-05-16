@@ -1,5 +1,5 @@
 {
-  "name": "expense-tracker",
+  "name": "backend",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -9,11 +9,18 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "devDependencies": {
-    "@types/node": "^25.7.0",
+  "type": "commonjs",
+  "dependencies": {
+    "@prisma/client": "^7.8.0",
+    "bcrypt": "^6.0.0",
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "helmet": "^8.1.0",
+    "jsonwebtoken": "^9.0.3",
     "prisma": "^7.8.0"
   },
-  "dependencies": {
-    "@prisma/client": "^7.8.0"
+  "devDependencies": {
+    "nodemon": "^3.1.14"
   }
 }

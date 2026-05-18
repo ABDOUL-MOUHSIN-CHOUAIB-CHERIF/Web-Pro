@@ -18,7 +18,7 @@ model User {
   goals      Goal[]
 
   createdAt  DateTime   @default(now())
-}
+} 
 
 model Expense {
   id          Int       @id @default(autoincrement())
@@ -29,6 +29,9 @@ model Expense {
 
   userId      Int
   user        User @relation(fields: [userId], references: [id])
+
+  categoryId  Int
+  category    Category @relation(fields: [categoryId], references: [id])
 }
 
 model Income {
@@ -42,11 +45,14 @@ model Income {
 }
 
 model Category {
+
   id        Int       @id @default(autoincrement())
   name      String
 
   userId    Int
   user      User @relation(fields: [userId], references: [id])
+
+  expenses  Expense[]
 }
 
 model Goal {

@@ -1,11 +1,21 @@
-const { get } = require('node:http');
+
 const prisma = require('../config/db');
 
+const {    createExpenseSchema,updateExpenseSchema} = require('../validators/expense.validator')
 
 // CREATE EXPENSE
 const createExpense = async (req, res) => {
 
     try {
+
+        const validation = createExpenseSchema.safeParse(req.body);
+
+        if(!validation.success){
+            return res.status(400).json({
+                errors: validation.error.errors
+
+            });
+        }
 
         const { title, amount, description, date, categoryId } = req.body;
 
@@ -201,6 +211,14 @@ const getByCategory = async (req, res) => {
 const updateExpense = async (req, res) => {
 
     try {
+        const validation = updateExpenseSchema.safeParse(req.body);
+
+        if(!validation.success){
+            return res.status(400).json({
+                errors: validation.error.errors
+
+            });
+        }
 
         const expId = parseInt(req.params.id);
         const UserId = req.user.id;

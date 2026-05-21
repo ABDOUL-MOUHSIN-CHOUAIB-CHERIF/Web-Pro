@@ -1,10 +1,6 @@
 const prisma = require('../config/db');
 
-
-
-// ==========================================
 // MONTHLY EXPENSE REPORT
-// ==========================================
 const getMonthlyExpenses = async (req, res) => {
 
     try {
@@ -42,11 +38,7 @@ const getMonthlyExpenses = async (req, res) => {
 };
 
 
-
-
-// ==========================================
 // MONTHLY INCOME REPORT
-// ==========================================
 const getMonthlyIncomes = async (req, res) => {
 
     try {
@@ -84,11 +76,7 @@ const getMonthlyIncomes = async (req, res) => {
 };
 
 
-
-
-// ==========================================
 // EXPENSES BY CATEGORY REPORT
-// ==========================================
 const getExpensesByCategory = async (req, res) => {
 
     try {
@@ -146,11 +134,8 @@ const getExpensesByCategory = async (req, res) => {
 };
 
 
-
-
-// ==========================================
 // EXPENSES BETWEEN TWO DATES
-// ==========================================
+
 const getExpensesByDateRange = async (req, res) => {
 
     try {
@@ -196,17 +181,13 @@ const getExpensesByDateRange = async (req, res) => {
         res.status(500).json({
             message: error.message
         });
-
+        
     }
 
 };
 
 
-
-
-// ==========================================
 // HIGHEST EXPENSE
-// ==========================================
 const getHighestExpense = async (req, res) => {
 
     try {
@@ -237,12 +218,7 @@ const getHighestExpense = async (req, res) => {
 
 };
 
-
-
-
-// ==========================================
 // FINANCIAL SUMMARY REPORT
-// ==========================================
 const getFinancialSummary = async (req, res) => {
 
     try {
@@ -313,23 +289,13 @@ const getFinancialSummary = async (req, res) => {
 };
 
 
-
-
-// ==========================================
-// EXPORTS
-// ==========================================
 module.exports = {
 
     getMonthlyExpenses,
-
     getMonthlyIncomes,
-
     getExpensesByCategory,
-
     getExpensesByDateRange,
-
     getHighestExpense,
-
     getFinancialSummary
 
 };

@@ -1,10 +1,19 @@
 const prisma = require('../config/db');
 
+const { createGoalSchema,updateGoalSchema} = require('../validators/goal.validator')
 
 // CREATE GOAL
 const createGoal = async (req, res) => {
 
     try {
+        const validation = createGoalSchema.safeParse(req.body);
+
+        if(!validation.success){
+            return res.status(400).json({
+                errors: validation.error.errors
+
+            });
+        }
 
         const { title, targetAmount } = req.body;
 
@@ -129,6 +138,15 @@ const getSingleGoal = async (req, res) => {
 const updateGoal = async (req, res) => {
 
     try {
+
+        const validation = updateGoalSchema.safeParse(req.body);
+
+        if(!validation.success){
+            return res.status(400).json({
+                errors: validation.error.errors
+
+            });
+        }
 
         const goalId = parseInt(req.params.id);
         const { title, targetAmount, currentAmount } = req.body;

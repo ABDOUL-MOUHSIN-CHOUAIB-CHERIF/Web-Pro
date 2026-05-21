@@ -1,10 +1,21 @@
  const prisma = require('../config/db');
 
+ const {createIncomeSchema,
+
+    updateIncomeSchema} = require('../validators/income.validator')
 
 // CREATE INCOME
 const createIncome = async (req, res) => {
 
     try {
+        const validation = createIncomeSchema.safeParse(req.body);
+
+        if(!validation.success){
+            return res.status(400).json({
+                errors: validation.error.errors
+
+            });
+        }
 
         const { source, amount, date } = req.body;
         const userId = req.user.id;
@@ -127,6 +138,14 @@ const updateIncome = async (req, res) => {
 
     try {
 
+        const validation = updateIncomeSchema.safeParse(req.body);
+
+        if(!validation.success){
+            return res.status(400).json({
+                errors: validation.error.errors
+
+            });
+        }
         const incomeId = parseInt(req.params.id);
         const userId = req.user.id;
         const { source, amount, date } = req.body;

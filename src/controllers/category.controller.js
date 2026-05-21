@@ -1,10 +1,19 @@
  const prisma = require('../config/db');
 
+const {  createCategorySchema, updateCategorySchema} = require('../validators/category.validator');
 
 // CREATE CATEGORY
 const createCategory = async (req, res) => {
 
     try {
+            const validation = createCategorySchema.safeParse(req.body);
+
+            if(!validation.success){
+                return res.status(400).json({
+                    errors: validation.error.errors
+
+                });
+            }
 
         const { name } = req.body;
 
@@ -128,6 +137,15 @@ const getSingleCategory = async (req, res) => {
 const updateCategory = async (req, res) => {
 
     try {
+
+        const validation = updateCategorySchema.safeParse(req.body);
+
+        if(!validation.success){
+            return res.status(400).json({
+                errors: validation.error.errors
+
+            });
+        }
 
         const categoryId = parseInt(req.params.id);
         const userId = req.user.id;

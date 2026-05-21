@@ -4,11 +4,23 @@ const bcrypt = require('bcrypt');
 
 const generateToken = require('../utils/generateToken');
 
+const { registerSchema, loginSchema} = require('../validators/auth.validator');
+
 
 // REGISTER
 const registerUser = async (req, res) => {
 
     try {
+
+        const validation = registerSchema.safeParse(req.body);
+
+        if(!validation.success){
+            return res.status(400).json({
+                errors: validation.error.errors
+
+            });
+        }
+
         const { name, email, password } = req.body;
         if (!name || !email || !password) {
             return res.status(400).json({
@@ -59,6 +71,13 @@ const registerUser = async (req, res) => {
 const loginUser = async (req, res) => {
 
     try {
+
+        const validation = loginSchema.safeParse(req.body);
+        if(!validation.success){
+            return res.status(400).json({
+                    errors: validation.error.errors
+            });
+        }
         const { email, password } = req.body;
         if (!email || !password) {
             return res.status(400).json({

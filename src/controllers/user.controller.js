@@ -7,7 +7,6 @@ const bcrypt = require('bcrypt');
 const getUsers = async (req, res) => {
 
     try {
-
         // const userId = req.user.id;
         const users = await prisma.user.findMany({
             select :{
